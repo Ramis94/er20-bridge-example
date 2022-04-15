@@ -5,8 +5,8 @@ task("swap")
   .addParam("token")
   .addParam("to")
   .addParam("amount")
-  .addParam("fromNetwork")
-  .addParam("toNetwork")
+  .addParam("fromnetwork")
+  .addParam("tonetwork")
   .addParam("nonce")
   .setAction(async (taskArgs, hre) => {
     const amount = hre.ethers.utils.parseEther(taskArgs.amount);
@@ -18,9 +18,9 @@ task("swap")
       taskArgs.token,
       taskArgs.to,
       amount,
-      taskArgs.fromNetwork,
-      taskArgs.toNetwork,
+      taskArgs.fromnetwork,
+      taskArgs.tonetwork,
       taskArgs.nonce
     );
-    console.log("result: " + result);
+    console.log("result: " + (await result.wait()));
   });

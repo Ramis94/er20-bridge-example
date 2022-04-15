@@ -6,8 +6,8 @@ task("redeem")
   .addParam("validator")
   .addParam("token")
   .addParam("amount")
-  .addParam("fromNetwork")
-  .addParam("toNetwork")
+  .addParam("fromnetwork")
+  .addParam("tonetwork")
   .addParam("nonce")
   .setAction(async (taskArgs, hre) => {
     const amount = hre.ethers.utils.parseEther(taskArgs.amount);
@@ -19,8 +19,8 @@ task("redeem")
     const msg = await hre.web3.utils.soliditySha3(
       taskArgs.token,
       amount.toString(),
-      taskArgs.fromNetwork,
-      taskArgs.toNetwork,
+      taskArgs.fromnetwork,
+      taskArgs.tonetwork,
       taskArgs.nonce
     );
     if (msg == null) {
@@ -32,12 +32,12 @@ task("redeem")
     const result = await contract.redeem(
       taskArgs.token,
       amount,
-      taskArgs.fromNetwork,
-      taskArgs.toNetwork,
+      taskArgs.fromnetwork,
+      taskArgs.tonetwork,
       taskArgs.nonce,
       sig.v,
       sig.r,
       sig.s
     );
-    console.log("result: " + result);
+    console.log("result: " + (await result.wait()));
   });
